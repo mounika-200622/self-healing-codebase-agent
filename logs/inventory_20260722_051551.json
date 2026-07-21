@@ -1,0 +1,21 @@
+{
+  "code_file": "inventory.py",
+  "run_id": "20260722_051551",
+  "final_status": "success",
+  "final_attempt": 2,
+  "attempts": [
+    {
+      "attempt": 1,
+      "test_output": "============================= test session starts =============================\nplatform win32 -- Python 3.10.11, pytest-9.1.1, pluggy-1.6.0 -- C:\\Users\\BWC1\\Downloads\\self-healing-agent\\venv\\Scripts\\python.exe\ncachedir: .pytest_cache\nrootdir: C:\\Users\\BWC1\\Downloads\\self-healing-agent\\broken_code\nplugins: anyio-4.14.2\ncollecting ... collected 4 items\n\ntest_inventory.py::test_discount_20_percent PASSED                       [ 25%]\ntest_inventory.py::test_discount_50_percent FAILED                       [ 50%]\ntest_inventory.py::test_total_cost_single_item FAILED                    [ 75%]\ntest_inventory.py::test_total_cost_multiple_items FAILED                 [100%]\n\n================================== FAILURES ===================================\n__________________________ test_discount_50_percent ___________________________\n\n    def test_discount_50_percent():\n>       assert apply_discount(200, 50) == 100\nE       assert 150 == 100\nE        +  where 150 = apply_discount(200, 50)\n\ntest_inventory.py:7: AssertionError\n_________________________ test_total_cost_single_item _________________________\n\n    def test_total_cost_single_item():\n>       assert total_cost([(10, 2)]) == 20\nE       assert 10 == 20\nE        +  where 10 = total_cost([(10, 2)])\n\ntest_inventory.py:10: AssertionError\n_______________________ test_total_cost_multiple_items ________________________\n\n    def test_total_cost_multiple_items():\n>       assert total_cost([(10, 2), (5, 3)]) == 35\nE       assert 15 == 35\nE        +  where 15 = total_cost([(10, 2), (5, 3)])\n\ntest_inventory.py:13: AssertionError\n=========================== short test summary info ===========================\nFAILED test_inventory.py::test_discount_50_percent - assert 150 == 100\nFAILED test_inventory.py::test_total_cost_single_item - assert 10 == 20\nFAILED test_inventory.py::test_total_cost_multiple_items - assert 15 == 35\n========================= 3 failed, 1 passed in 0.18s =========================\n",
+      "passed": false,
+      "code_before": "def apply_discount(price, discount_percent):\n    \"\"\"Applies a percentage discount to a price. E.g. apply_discount(100, 20) returns 80.\"\"\"\n    return price - discount_percent\n\n\ndef total_cost(items):\n    \"\"\"items is a list of (price, quantity) tuples. Returns total cost.\"\"\"\n    total = 0\n    for price, quantity in items:\n        total += price\n    return total",
+      "proposed_fix": "def apply_discount(price, discount_percent):\n    \"\"\"Applies a percentage discount to a price. E.g. apply_discount(100, 20) returns 80.\"\"\"\n    return price * (1 - discount_percent / 100)\n\n\ndef total_cost(items):\n    \"\"\"items is a list of (price, quantity) tuples. Returns total cost.\"\"\"\n    total = 0\n    for price, quantity in items:\n        total += price * quantity\n    return total"
+    },
+    {
+      "attempt": 2,
+      "test_output": "============================= test session starts =============================\nplatform win32 -- Python 3.10.11, pytest-9.1.1, pluggy-1.6.0 -- C:\\Users\\BWC1\\Downloads\\self-healing-agent\\venv\\Scripts\\python.exe\ncachedir: .pytest_cache\nrootdir: C:\\Users\\BWC1\\Downloads\\self-healing-agent\\broken_code\nplugins: anyio-4.14.2\ncollecting ... collected 4 items\n\ntest_inventory.py::test_discount_20_percent PASSED                       [ 25%]\ntest_inventory.py::test_discount_50_percent PASSED                       [ 50%]\ntest_inventory.py::test_total_cost_single_item PASSED                    [ 75%]\ntest_inventory.py::test_total_cost_multiple_items PASSED                 [100%]\n\n============================== 4 passed in 0.02s ==============================\n",
+      "passed": true,
+      "note": "Success - no fix needed this round."
+    }
+  ]
+}
